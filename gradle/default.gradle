@@ -1,0 +1,73 @@
+
+allprojects {
+
+    // 인텔리J 적용
+    apply plugin: 'idea'
+
+    // 인텔리J 모듈 설정 셋팅 선언
+    idea {
+        module {
+            inheritOutputDirs = false
+            outputDir = file("$buildDir/classes/main/")
+            jdkName = "1.8"
+            downloadJavadoc = true
+            downloadSources = true
+        }
+    }
+
+    configurations {
+        all {
+            //제외 처리 필요한 라이브러리 파일 설정
+            exclude group: 'commons-loggin'
+            exclude module: 'slf4j-log4j12'
+            resolutionStrategy {
+                // 라이브러리 버전 충돌시 에러 처리
+                failOnVersionConflict()
+                // 모듈 변경 라이브러리 버전(SNAPSHOT) 캐쉬 없음
+                cacheChangingModulesFor 0, 'seconds'
+                // 동적 버전 라이브러리 버전은 10분만 캐쉬
+                cacheDynamicVersionsFor 10 * 60, 'seconds'
+            }
+        }
+    }
+}
+
+configure(allprojects.findAll { allprojects -> allprojects.name.contains('-')}) {
+
+    apply plugin: 'java'
+    apply plugin: 'war'
+
+    // JDK 버전
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    // 컴파일 인코딩 옵션
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = "UTF-8"
+
+    // 컴파일 옵션
+    compileJava {
+        //options.compilerArgs << '-Xdocinit:none'
+        options.fork = true
+        options.forkOptions.executable = 'javac'
+    }
+
+    // 의존성 라이브러리 저장소
+    repositories {
+        mavenCentral()
+    }
+
+    // Spring Dependency Management Plugin 사용
+    apply plugin: 'io.spring.dependency-management'
+
+
+    apply plugin: 'org.springframework.boot'
+
+    group = 'com.chatbot.login'
+    //version = '0.0.1-SNAPSHOT'
+
+    dependencies {
+        compileOnly('org.projectlombok:lombok')
+
+        runtime('mysql:mysql-connector-java')
+    }
+}

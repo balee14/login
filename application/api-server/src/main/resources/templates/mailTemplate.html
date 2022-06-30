@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<div class="page-sendemail-frame">
+	<div class="pwd-certification" style="width:100%; height:100vh; background:#fafafa;">
+		<div class="box" style="width:100%; height:514px; background:#fff;">
+			<div class="guide" style="padding:26px 0 12px 36px; font-size:13px; line-height:13px; color:#555; border-bottom:1px solid #eee;">
+				<img src="http://d3jitq683q7ho7.cloudfront.net/logo3.png" alt="ibot beta" style="padding-right:23px;"> 본 메일은 계정인증을 위해 아이봇에서 발송한 메일입니다.
+			</div>
+			<div class="content-area" style="margin:80px 50px 0 50px;">
+				<p class="txt" style="margin-bottom:30px; padding-left:22px; font-size:16px; line-height:22px; color:#111; background:url('http://d3jitq683q7ho7.cloudfront.net/ico_msg.png') 0 4px no-repeat;">안녕하세요 고객님, 아이봇입니다.<span th:if="${!''.equals(searchType)}"><br>고객님의 <span th:text="${searchType}"></span> 찾기 이메일 인증번호를 알려드립니다.</span></p>
+				<div class="certification-no" style="height:57px; margin-bottom:50px; border:1px solid #6f45bf; border-radius:10px; overflow:hidden;font-size:0;">
+					<span class="tit" style="display:inline-block; width:24.5%; height:57px; font-weight:300; font-size:16px; line-height:55px; text-align:center; color:#fff; background:#6f45bf; box-sizing:border-box; vertical-align:top;">인증번호</span>
+					<strong class="no" style="display:inline-block; width:75%; font-weight:600; font-size:18px; line-height:57px; color:#111; text-align:center; vertical-align:top;"><span th:text="${message}"></span></strong>
+				</div>
+				<p class="ps" style="font-size:14px; line-height:24px; color:#333;">
+					인증번호를 확인하신 후 아이봇 사이트에서 이메일 인증번호를 바로 입력하고 이메일 인증을 완료해 주세요.<br>
+					아이봇을 이용해주시는 고객님들께 보다 나은 서비스를 제공할 수 있도록 항상 최선을 다하겠습니다.<br><br>
+					감사합니다.<br><br>
+					<span class="by" style="display:block; text-align:right;">아이봇 드림</span>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="currentPage='account'"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="layout/layout :: html_head">
+</head>
+<body th:inline="text" class="hold-transition">
+[[${session.user_name}]]! login success!<br/>
+accesstoken : <span th:text="${session.access_token}"></span><br/>
+<a href="/logout">logout</a><br/>
+패스워드 초기화
+
+</body>
+</html>

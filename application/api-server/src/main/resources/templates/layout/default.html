@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="layout/layout :: html_head">
+    <title>정산 시스템</title>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!-- Main Header -->
+    <header class="main-header" th:replace="layout/layout :: header">
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar" th:replace="layout/layout :: main_sidebar">
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Page Header
+                <small>Optional description</small>
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div th:replace="layout/layout :: error-panel">
+            </div>
+
+            <!-- Your Page Content Here -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer" th:replace="layout/layout :: footer">
+    </footer>
+
+</div>
+
+<div th:replace="layout/layout :: script-area">
+</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:replace="layout/layout :: html_head">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <b>정산</b> 시스템
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <h2 class="headline text-red">500</h2>
+
+        <h3><i class="fa fa-warning text-red"></i> 에러가 발생했습니다. </h3>
+
+        <p><a href="javascript:history.back();"><b>이전 페이지</b></a>로 돌아가거나 <a href="/"><b>첫페이지</b></a>로 돌아가세요.</p>
+
+        <p th:text="${url}"></p>
+        <p th:text="${exception.getMessage()}"></p>
+        <textarea readonly="readonly" rows="10" th:text="${errorTrace}" class="form-control">
+        </textarea>
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<div th:replace="layout/layout :: script-area">
+</div>
+
+</body>
+</html>

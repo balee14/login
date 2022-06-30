@@ -1,0 +1,585 @@
+application:
+  version: 0.1
+  title: Adjestment System
+
+debug: false
+
+spring:
+  profiles:
+    active: local
+  
+  aop:
+    proxy-target-class: true
+
+  batch:
+    initializer:
+      enabled: true
+    job:
+      enabled: false
+
+---
+server:
+  port: 18080
+  servlet:
+    context-path: /
+
+spring:
+  profiles: local
+
+  devtools:
+    livereload:
+      enabled: false
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.150.150:3306/login?useSSL=false
+    username: login
+    password: LucyLogin!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+#  datasource:
+#    #type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:mysql://127.0.0.1:3306/login?useSSL=false
+#    username: login
+#    password: login!@#$
+#    driver-class-name: com.mysql.jdbc.Driver
+#    test-on-borrow: true
+#    validation-query: SELECT 1
+    #hikari:
+    #  jdbc-url: jdbc:mysql://127.0.0.1:3306/login?useSSL=false
+    #  username: login
+    #  password: login!@#$
+    #  maximum-pool-size: 10 #maximumPoolSize와 minimumIdle값(default : maximumPoolSize)을 같은 값으로 지정해서 connection Pool의 크기를 fix하는 것을 강력하게 권장
+    #  max-lifetime: 1800000 #connection 생명 주기(30분)
+    #  idle-timeout: 600000 #connnection의 maximum idle time(10분)
+
+  jpa:
+    database: mysql
+    show-sql: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        ddl-auto: update
+        hbm2ddl:
+          import_files:
+        id:
+          new_generator_mappings: false
+
+    #database: MYSQL
+#    show-sql: true
+#    generate-ddl: true
+#    hibernate:
+#      ddl-auto: update
+#      dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false #Development only
+    check-template: true
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+
+kafka:
+  consumer:
+    bootstrap: scm-enliple.iptime.org:19091,scm-enliple.iptime.org:19092,scm-enliple.iptime.org:19093
+    group: billing
+    topic: cdr
+
+adjustment:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.150.150:3306/billing?useSSL=false
+    username: billing
+    password: LucyBilling!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+homepage:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.150.150:3306/homepage?useSSL=false
+    username: homepage
+    password: LucyHomepage!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+#adjustment:
+#  datasource:
+#    #type: com.zaxxer.hikari.HikariDataSource
+#    url: jdbc:mysql://127.0.0.1:3306/adjustment?useSSL=false
+#    username: adjustment
+#    password: adjustment!@#$
+#    driver-class-name: com.mysql.jdbc.Driver
+#    test-on-borrow: true
+#    validation-query: SELECT 1
+#    #hikari:
+#    #  maximum-pool-size: 10 #maximumPoolSize와 minimumIdle값(default : maximumPoolSize)을 같은 값으로 지정해서 connection Pool의 크기를 fix하는 것을 강력하게 권장
+#    #  max-lifetime: 1800000 #connection 생명 주기(30분)
+#    #  idle-timeout: 600000 #connnection의 maximum idle time(10분)
+
+login:
+  oauth-token:
+    url : http://localhost:8080/oauth/token
+    client-id: client2
+    client-secret: secret
+  token:
+    key: enliple!1ibot!@#
+
+mail:
+  from: ibot@enliple.com
+  debug: true
+  host: smtps.hiworks.com
+  port: 465
+  protocol: smtp
+  default-encoding: UTF-8
+  username: ibot@enliple.com
+  password: ibotenliple!!
+  smtp:
+    ssl-enable: true
+    start-tls-enable: true
+    auth: true
+
+logging:
+  level:
+    com.chatbot.adjustment: INFO
+    org.springframework: INFO
+    org.springframework.batch: INFO
+    org.hibernate: INFO
+    org.hibernate.SQL: INFO
+    org.apache.kafka: INFO
+
+chat:
+  server:
+    host: http://www.shobot.co.kr:80
+
+mobon:
+  api:
+    check-user-url: http://api.mobon.net:9981/api/dspt/external/advertiser/checkUser
+    create-url: http://api.mobon.net:9981/api/dspt/external/advertiser/create
+    checkPasswd-url: http://api.mobon.net:9981/api/dspt/external/advertiser/checkPasswd
+    update-url: http://api.mobon.net:9981/api/dspt/external/advertiser/update
+    detail-url: http://api.mobon.net:9981/api/dspt/external/advertiser/detail
+
+viser:
+  api:
+    terminate-user-url: http://192.168.150.8:8080/api/account/terminationLink    
+
+---
+server:
+  port: 18080
+  servlet:
+    context-path: /billing
+
+spring:
+  profiles: dev
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/login?useSSL=false
+    username: login
+    password: LucyLogin!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+  jpa:
+    database: mysql
+    show-sql: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        ddl-auto: update
+        hbm2ddl:
+          import_files:
+        id:
+          new_generator_mappings: false
+
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false #Development only
+    check-template: true
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+
+kafka:
+  consumer:
+    bootstrap: scm-enliple.iptime.org:19091,scm-enliple.iptime.org:19092,scm-enliple.iptime.org:19093
+    group: billing
+    topic: cdr
+
+adjustment:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/billing?useSSL=false
+    username: billing
+    password: LucyBilling!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+homepage:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/homepage?useSSL=false
+    username: homepage
+    password: LucyHomepage!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+login:
+  oauth-token:
+    url: http://192.168.150.150:8080/login/oauth/token
+    client-id: client1
+    client-secret: secret
+  revoke-token:
+    url: http://192.168.150.150:8080/login/oauth/revoke-token
+  token:
+    key: enliple!1ibot!@#
+    
+mail:
+  from: ibot@enliple.com
+  debug: true
+  host: smtps.hiworks.com
+  port: 465
+  protocol: smtp
+  default-encoding: UTF-8
+  username: ibot@enliple.com
+  password: ibotenliple!!
+  smtp:
+    ssl-enable: true
+    start-tls-enable: true
+    auth: true
+
+logging:
+  level:
+    com.chatbot.adjustment: INFO
+    org.springframework: INFO
+    org.springframework.batch: INFO
+    org.hibernate: INFO
+    org.hibernate.SQL: INFO
+    org.apache.kafka: INFO
+
+chat:
+  server:
+    host: http://www.shobot.co.kr:80
+    
+mobon:
+  api:
+    check-user-url: http://api.mobon.net:9981/api/dspt/external/advertiser/checkUser
+    create-url: http://api.mobon.net:9981/api/dspt/external/advertiser/create
+    checkPasswd-url: http://api.mobon.net:9981/api/dspt/external/advertiser/checkPasswd
+    update-url: http://api.mobon.net:9981/api/dspt/external/advertiser/update
+    detail-url: http://api.mobon.net:9981/api/dspt/external/advertiser/detail
+    
+viser:
+  api:
+    terminate-user-url: http://192.168.150.8:8080/api/account/terminationLink
+      
+---
+spring:
+  profiles: live
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://ai-maria-01.c3o8jg3bnucr.ap-northeast-2.rds.amazonaws.com:3306/login?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: login
+    password: LucyLogin!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+  jpa:
+    database: mysql
+    show-sql: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        ddl-auto: update
+        hbm2ddl:
+          import_files:
+        id:
+          new_generator_mappings: false
+
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false #Development only
+    check-template: true
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+
+kafka:
+  consumer:
+    bootstrap: scm-enliple.iptime.org:19091,scm-enliple.iptime.org:19092,scm-enliple.iptime.org:19093
+    group: billing
+    topic: cdr
+
+adjustment:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://ai-maria-01.c3o8jg3bnucr.ap-northeast-2.rds.amazonaws.com:3306/billing?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: billing
+    password: LucyBilling!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+homepage:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://ai-maria-01.c3o8jg3bnucr.ap-northeast-2.rds.amazonaws.com:3306/homepage?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: homepage
+    password: LucyHomepage!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+login:
+  oauth-token:
+    url: http://login.istore.camp/login/oauth/token
+    client-id: client1
+    client-secret: secret
+  revoke-token:
+    url: http://login.istore.camp/login/oauth/revoke-token
+  token:
+    key: enliple!1ibot!@#
+
+mail:
+  from: ibot@enliple.com
+  debug: true
+  host: smtps.hiworks.com
+  port: 465
+  protocol: smtp
+  default-encoding: UTF-8
+  username: ibot@enliple.com
+  password: ibotenliple!!
+  smtp:
+    ssl-enable: true
+    start-tls-enable: true
+    auth: true
+
+logging:
+  level:
+    com.chatbot.adjustment: ERROR
+    org.springframework: ERROR
+    org.springframework.batch: ERROR
+    org.hibernate: ERROR
+    org.hibernate.SQL: ERROR
+    org.apache.kafka: ERROR
+
+chat:
+  server:
+    host: http://chatapi.istore.camp
+    
+mobon:
+  api:
+    check-user-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/checkUser
+    create-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/create
+    checkPasswd-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/checkPasswd
+    update-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/update
+    detail-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/detail
+
+viser:
+  api:
+    terminate-user-url: https://viser.ibot.camp/api/account/terminationLink
+    
+---
+spring:
+  profiles: stage
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://112.175.17.118:3306/login?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: login
+    password: LucyLogin!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+  jpa:
+    database: mysql
+    show-sql: false
+    generate-ddl: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        ddl-auto: update
+        hbm2ddl:
+          import_files:
+        id:
+          new_generator_mappings: false
+
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false #Development only
+    check-template: true
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+
+kafka:
+  consumer:
+    bootstrap: scm-enliple.iptime.org:19091,scm-enliple.iptime.org:19092,scm-enliple.iptime.org:19093
+    group: billing
+    topic: cdr
+
+adjustment:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://112.175.17.118:3306/billing?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: billing
+    password: LucyBilling!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+homepage:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://112.175.17.118:3306/homepage?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: homepage
+    password: LucyHomepage!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+login:
+  oauth-token:
+    url: http://112.175.17.118:6060/login/oauth/token
+    client-id: client1
+    client-secret: secret
+  revoke-token:
+    url: http://112.175.17.118:6060/login/oauth/revoke-token
+  token:
+    key: enliple!1ibot!@#
+    
+mail:
+  from: ibot@enliple.com
+  debug: true
+  host: smtps.hiworks.com
+  port: 465
+  protocol: smtp
+  default-encoding: UTF-8
+  username: ibot@enliple.com
+  password: ibotenliple!!
+  smtp:
+    ssl-enable: true
+    start-tls-enable: true
+    auth: true
+
+logging:
+  level:
+    com.chatbot.adjustment: OFF
+    #org.springframework: DEBUG
+    #org.springframework.batch: DEBUG
+    org.hibernate: OFF
+    org.hibernate.SQL: OFF
+    #org.apache.kafka: INFO
+
+chat:
+  server:
+    host: http://chatapi.showbot.ai
+    
+mobon:
+  api:
+    check-user-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/checkUser
+    create-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/create
+    checkPasswd-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/checkPasswd
+    update-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/update
+    detail-url: http://manage.mobon.net:9981/api/dspt/external/advertiser/detail
+    
+viser:
+  api:
+    terminate-user-url: http://192.168.150.8:8080/api/account/terminationLink    

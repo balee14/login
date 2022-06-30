@@ -1,0 +1,221 @@
+application:
+  version: 0.1
+  title: Login System
+
+debug: false
+
+server:
+  port: 8080
+  servletPath: /*
+  context-path: /
+
+spring:
+  profiles:
+    active: dev
+
+  aop:
+    proxy-target-class: true
+
+---
+spring:
+  profiles: local
+
+  devtools:
+    livereload:
+      enabled: true
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.150.150:3306/login?useSSL=false
+    username: login
+    password: login!@#$
+    initialSize: 1
+    maxActive: 10                         #최대 active connection 개수
+    maxIdle: 10                           #사용되지 않고 풀에 저장될 수 있는 최대 커넥션 개수
+    minIdle: 1                            #사용되지 않고 풀에 저장될 수 있는 최소 커넥션 개수
+    maxWait: 10000                        #connection 사용이 많아져서 connection pool이 비었을 때 대기시간 (단위 1/1000초)
+    validationQuery: select 1             #유효성 검사시에 사용할 쿼리문
+    testWhileIdle: true                   #유휴 커넥션을 제거할때 해당 커넥션의 유효성 테스트 여부
+    timeBetweenEvictionRunsMillis: 30000  #30초 설정된 시간 간격마다 유휴 커넥션을 풀에서 제거하는 evictor thread 가 실행
+    minEvictableIdleTimeMillis: 60000     #evictor thread 작업시 설정된 시간만큼 사용되지 않은 커넥션을 제거
+
+  jpa:
+   show-sql: false
+   generate-ddl: false
+   properties:
+     hibernate:
+       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+       ddl-auto: update
+       hbm2ddl:
+         import_files:
+
+homepage:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.150.150:3306/adjustment?useSSL=false
+    username: adjustment
+    password: adjustment!@#$
+    initialSize: 1
+    maxActive: 10
+    maxIdle: 10
+    minIdle: 1
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+api:
+  server:
+    host: http://localhost:8081
+
+logging:
+  level:
+    com.chatbot.login: DEBUG
+
+---
+spring:
+  profiles: dev
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.150.150:3306/login?useSSL=false
+    username: login
+    password: LucyLogin!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+  jpa:
+   show-sql: false
+   generate-ddl: false
+   properties:
+     hibernate:
+       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+       ddl-auto: update
+       hbm2ddl:
+         import_files:
+
+homepage:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.150.150:3306/homepage?useSSL=false
+    username: homepage
+    password: LucyHomepage!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+api:
+  server:
+    host: http://192.168.150.150:18080/billing
+    
+---
+spring:
+  profiles: live
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://ai-maria-01.c3o8jg3bnucr.ap-northeast-2.rds.amazonaws.com:3306/login?useSSL=false
+    username: login
+    password: LucyLogin!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+  jpa:
+   show-sql: false
+   generate-ddl: false
+   properties:
+     hibernate:
+       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+       ddl-auto: update
+       hbm2ddl:
+         import_files:
+
+homepage:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://ai-maria-01.c3o8jg3bnucr.ap-northeast-2.rds.amazonaws.com:3306/homepage?useSSL=false
+    username: homepage
+    password: LucyHomepage!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+api:
+  server:
+    host: http://login.istore.camp/billing
+      
+---
+spring:
+  profiles: stage
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://112.175.17.118:3306/login?useSSL=false
+    username: login
+    password: LucyLogin!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+  jpa:
+   show-sql: false
+   generate-ddl: false
+   properties:
+     hibernate:
+       dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+       ddl-auto: update
+       hbm2ddl:
+         import_files:
+
+homepage:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://112.175.17.118:3306/homepage?useSSL=false
+    username: homepage
+    password: LucyHomepage!23$
+    initialSize: 5
+    maxActive: 40
+    maxIdle: 40
+    minIdle: 5
+    maxWait: 10000
+    validationQuery: select 1
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 30000
+    minEvictableIdleTimeMillis: 60000
+
+api:
+  server:
+    host: http://login.showbot.ai/billing

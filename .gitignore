@@ -1,0 +1,17 @@
+/.gradle/
+/.idea/
+/logs/
+/out/
+/oauth2-server/
+/spring-security-oauth-resource/
+/adjustment.iml
+/docker-compose.yml
+/gradlew
+/gradlew.bat
+/webpack.config.js
+/gradle/wrapper/
+.classpath
+.project
+.settings
+*.class
+/bin/
